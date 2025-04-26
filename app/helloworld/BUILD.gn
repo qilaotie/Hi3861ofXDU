@@ -1,0 +1,11 @@
+static_library("helloworld_demo") { 
+sources = [ 
+"helloworld_demo.c", 
+] 
+include_dirs = [ 
+"//base/iot_hardware/peripheral/interfaces/kits", 
+] 
+} 
+# static_library：将sources中的源文件编译后生成``helloworld_demo``库文件 
+# sources：实现本工程的功能需要编译的所有.c源文件。 
+# include_dirs：sources 中的所有.c 源文件所包含的头文件的路径。
