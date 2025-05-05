@@ -140,6 +140,10 @@ void EncoderEntry(void)
         // 休眠1000ms
         usleep(1000000);
     }
+    IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_5, IOT_GPIO_VALUE0);
+    IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_6, IOT_GPIO_VALUE0);
+    IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_9, IOT_GPIO_VALUE0);
+    IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_10, IOT_GPIO_VALUE0);
     // 取消GPIO0的中断功能
     IoTGpioUnregisterIsrFunc(IOT_IO_NAME_GPIO_0);
     // 取消GPIO12的中断功能
@@ -161,6 +165,22 @@ static void EncoderControlTask(void)
     attr.priority = osPriorityNormal;
     printf("24009180005\t张瀚予\nLeft Go!\n");
     Flag = 1;
+    IoTGpioInit(IOT_IO_NAME_GPIO_5);
+    IoTGpioInit(IOT_IO_NAME_GPIO_6);
+    IoTGpioInit(IOT_IO_NAME_GPIO_9);
+    IoTGpioInit(IOT_IO_NAME_GPIO_10);
+    IoSetFunc(IOT_IO_NAME_GPIO_5, IOT_IO_FUNC_GPIO_5_GPIO);
+    IoSetFunc(IOT_IO_NAME_GPIO_6, IOT_IO_FUNC_GPIO_6_GPIO);
+    IoSetFunc(IOT_IO_NAME_GPIO_9, IOT_IO_FUNC_GPIO_9_GPIO);
+    IoSetFunc(IOT_IO_NAME_GPIO_10, IOT_IO_FUNC_GPIO_10_GPIO);
+    IoTGpioSetDir(IOT_IO_NAME_GPIO_5, IOT_GPIO_DIR_OUT);
+    IoTGpioSetDir(IOT_IO_NAME_GPIO_6, IOT_GPIO_DIR_OUT);
+    IoTGpioSetDir(IOT_IO_NAME_GPIO_9, IOT_GPIO_DIR_OUT);
+    IoTGpioSetDir(IOT_IO_NAME_GPIO_10, IOT_GPIO_DIR_OUT);
+    IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_5, IOT_GPIO_VALUE1);
+    IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_6, IOT_GPIO_VALUE0);
+    IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_9, IOT_GPIO_VALUE0);
+    IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_10, IOT_GPIO_VALUE1);
     if (osThreadNew((osThreadFunc_t)EncoderEntry, NULL, &attr) == NULL) {
         printf("[LedExample] Failed to create LedTask!\n");
     }
