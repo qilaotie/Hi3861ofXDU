@@ -17,6 +17,11 @@ features = [
     # "tricolor_lamp_demo:TraColorLampControl",
     # "encoder_demo:encoder_control",
     # "button_demo:button_control",
-    "hcsr04_demo:hcsr04_control",
+    # "hcsr04_demo:hcsr04_control",
+    # "motor_demo:motor_control",
+    # "led_pwm_demo:led_pwm_control",
+    # "sg92r_demo:sg92r_control",
+    # "buzzer_demo:buzzer_control",
+    "ultrasonic_motor:motor_control",
     ] 
 }
