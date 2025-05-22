@@ -14,6 +14,7 @@
 import("//build/lite/config/component/lite_component.gni") 
 lite_component("app") { 
 features = [ 
+    # "startup",
     # "tricolor_lamp_demo:TraColorLampControl",
     # "encoder_demo:encoder_control",
     # "button_demo:button_control",
@@ -22,6 +23,14 @@ features = [
     # "led_pwm_demo:led_pwm_control",
     # "sg92r_demo:sg92r_control",
     # "buzzer_demo:buzzer_control",
-    "ultrasonic_motor:motor_control",
+    # "ultrasonic_motor:motor_control",
+    # "cw2015_demo:cw2015_control",
+    # "rtc_demo:rtc_control",
+    # "nfc_demo:nfc_control",
+    # "i2c_bus_demo:i2c_bus_demo",
+    # "lth1550_demo:lth1550_control",
+    # "uart_demo:uart_control",
+    "uart2:uart_control",
+    # "thread_demo:thread_control",
     ] 
 }
