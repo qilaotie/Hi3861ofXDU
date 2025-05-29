@@ -147,14 +147,14 @@ static void UartTask(void)
     CW2015Init();
     OledInit();
     OledFillScreen(0);
-    const char *data = "24009180005          Zhanghanyu";
+    const char *data1 = "24009180049byq";
     uint32_t count = 0;
     uint32_t len = 0;
     uint8_t ext_io_state = 0;
     uint8_t ext_io_state_d = 0x3C;
     uint8_t status;
     static char line[32] = {0};
-    snprintf(line, sizeof(line), "%s", data);
+    snprintf(line, sizeof(line), "%s", data1);
     
     unsigned char uartReadBuff[UART_BUFF_SIZE] = {0};
 
@@ -189,13 +189,15 @@ static void UartTask(void)
                 printf("button1 pressed \r\n");
                 // OledShowString(3, 1, data, 2);
                 // 通过UART1 发送数据 Send data through UART1
-                IoTUartWrite(HI_UART_IDX_1, (unsigned char*)data, strlen(data));
+                IoTUartWrite(HI_UART_IDX_1, (unsigned char*)data1, strlen(data1));
                 // 通过UART1 接收数据 Receive data through UART1
                 len = IoTUartRead(HI_UART_IDX_1, uartReadBuff, UART_BUFF_SIZE);
                 if (len > 0) {
                     // 把接收到的数据打印出来 Print the received data
-                    //printf("Uart Read Data is: [ %d ] %s \r\n", count, uartReadBuff);
+                    printf("Uart Read Data is: [ %d ] %s \r\n", count, uartReadBuff);
+                    OledFillScreen(0);
                     OledShowString(3, 1, uartReadBuff, 2);
+                    len = 0;
                 }
                 usleep(U_SLEEP_TIME);
                 count++;

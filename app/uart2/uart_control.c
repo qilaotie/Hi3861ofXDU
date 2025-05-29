@@ -156,7 +156,8 @@ static void UartTask(void)
     static char line[32] = {0};
     snprintf(line, sizeof(line), "%s", data);
     
-    unsigned char uartReadBuff[UART_BUFF_SIZE] = {0};
+    unsigned char uartReadBuff1[UART_BUFF_SIZE] = {0};
+    unsigned char uartReadBuff2[UART_BUFF_SIZE] = {0};
 
     // 对UART1的一些初始化 Some initialization of UART1
     Uart1GpioInit();
@@ -165,16 +166,17 @@ static void UartTask(void)
 
     while (1) {
         // 通过UART1 接收数据 Receive data through UART1
-        len = IoTUartRead(HI_UART_IDX_1, uartReadBuff, UART_BUFF_SIZE);
-        // if (len > 0) {
-        //     // 把接收到的数据打印出来 Print the received data
-        //     printf("Uart Read Data is: [ %d ] %s \r\n", count, uartReadBuff);
-        // }
-        // 通过UART1 发送数据 Send data through UART1
-        IoTUartWrite(HI_UART_IDX_1, (unsigned char*)data, strlen(data));
-        usleep(U_SLEEP_TIME);
-        OledShowString(3, 1, uartReadBuff, 1);
-        count++;
+        len = IoTUartRead(HI_UART_IDX_1, uartReadBuff1, UART_BUFF_SIZE);
+        if (len > 0) {
+            // 把接收到的数据打印出来 Print the received data
+            printf("Uart Read Data is: [ %d ] %s \r\n", count, uartReadBuff1);
+            // 通过UART1 发送数据 Send data through UART1
+            IoTUartWrite(HI_UART_IDX_1, (unsigned char*)data, strlen(data));
+            usleep(U_SLEEP_TIME);
+            OledShowString(3, 1, uartReadBuff1, 1);
+            count++;
+            len = 0;
+        }
     }
 }
 
